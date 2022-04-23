@@ -12,10 +12,11 @@ class ListViewController: UIViewController {
     private var viewModel: ListViewModel
     private lazy var titleLabel : UILabel = {
         let label = UILabel()
-        label.text = "Movies"
+        label.text = "Trending Movies"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 24.0, weight: .semibold)
         label.textAlignment = .left
+        label.textColor = .cGrayDark
         return label
     }()
    
@@ -66,10 +67,15 @@ class ListViewController: UIViewController {
     
     private func bindViewModel() {
         viewModel.didStartLoading = {
-            ///Show Activity indicator
+            LoadingView.show()
         }
         viewModel.didStopLoading = {
-            ///Hide Activity indicator
+            LoadingView.hide()
+        }
+        viewModel.didShowError = { errorTitle, errorMessage in
+            DispatchQueue.main.async {
+                self.showAlert(title: errorTitle, message: errorMessage)
+            }
         }
         viewModel.didReload = {
             DispatchQueue.main.async {
@@ -88,7 +94,7 @@ extension ListViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:ListTableViewCell.cellID, for: indexPath) as? ListTableViewCell ?? ListTableViewCell(style: .default, reuseIdentifier: ListTableViewCell.cellID)
-        cell.textLabel?.text = "Test"
+        cell.configure(with: viewModel.getMovieData(index: indexPath.row), imageService: viewModel.imageService)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -98,11 +104,15 @@ extension ListViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200.0
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.didSelectItem(at: indexPath.row)
+    }
 }
-
+//MARK: - Setup
 extension ListViewController {
     private func setupViews() {
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .cBackground
         view.addSubview(headerStackView)
         view.addSubview(tableView)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkText]

@@ -8,7 +8,8 @@
 import UIKit
 
 protocol MoviesFlowCoordinatorDependencies  {
-    func makeMoviesListController() -> ListViewController
+    func makeMoviesListController(actions: MoviesViewModelActions) -> ListViewController
+    func makeMoviesDetailController(movieDetail: MovieDetail) -> MovieDetailViewController
 }
 final class MoviesFlowCoordinator {
     
@@ -22,7 +23,12 @@ final class MoviesFlowCoordinator {
     }
     
     func start() {
-        let vc = dependencies.makeMoviesListController()
+        let actions = MoviesViewModelActions(showMovieDetail: showMovieDetails)
+        let vc = dependencies.makeMoviesListController(actions: actions)
         navigationController?.pushViewController(vc, animated: false)
+    }
+    private func showMovieDetails(movieDetail: MovieDetail) {
+        let vc = dependencies.makeMoviesDetailController(movieDetail: movieDetail)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

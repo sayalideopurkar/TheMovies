@@ -27,7 +27,7 @@ struct Result: Codable {
     let genreIDS: [Int]
     let id: Int
     let originalTitle: String
-    let originalLanguage: OriginalLanguage
+    let originalLanguage: String
     let title: String
     let backdropPath: String?
     let popularity: Double
@@ -50,8 +50,4 @@ struct Result: Codable {
         case video
         case voteAverage = "vote_average"
     }
-}
-
-enum OriginalLanguage: String, Codable {
-    case en = "en"
 }

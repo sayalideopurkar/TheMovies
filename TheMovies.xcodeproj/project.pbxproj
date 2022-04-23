@@ -22,6 +22,18 @@
 		E0228A24281041D700DAC84D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A23281041D700DAC84D /* Movie.swift */; };
 		E0228A272810462C00DAC84D /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A262810462C00DAC84D /* ListTableViewCell.swift */; };
 		E0228A2A2810497300DAC84D /* MoviesFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A292810497300DAC84D /* MoviesFlowCoordinator.swift */; };
+		E0228A2C28119B8400DAC84D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A2B28119B8400DAC84D /* NetworkService.swift */; };
+		E0228A2E28119BD100DAC84D /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A2D28119BD100DAC84D /* Common.swift */; };
+		E0228A3028119C4300DAC84D /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A2F28119C4300DAC84D /* ImageService.swift */; };
+		E0228A322811A30600DAC84D /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A312811A30600DAC84D /* MoviesService.swift */; };
+		E0228A342811A38F00DAC84D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A332811A38F00DAC84D /* LoadingView.swift */; };
+		E0228A362811A3B300DAC84D /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A352811A3B300DAC84D /* UIColor+Additions.swift */; };
+		E0228A382811A3EF00DAC84D /* UIController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A372811A3EF00DAC84D /* UIController+Additions.swift */; };
+		E0228A3C2811B29A00DAC84D /* MovieListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A3B2811B29A00DAC84D /* MovieListRequest.swift */; };
+		E0228A3E281441CB00DAC84D /* MovieDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A3D281441CB00DAC84D /* MovieDetailRequest.swift */; };
+		E0228A4028144A6800DAC84D /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A3F28144A6800DAC84D /* MovieDetail.swift */; };
+		E0228A432814538D00DAC84D /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A422814538D00DAC84D /* MovieDetailViewController.swift */; };
+		E0228A45281453A600DAC84D /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0228A44281453A600DAC84D /* MovieDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +73,18 @@
 		E0228A23281041D700DAC84D /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		E0228A262810462C00DAC84D /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		E0228A292810497300DAC84D /* MoviesFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesFlowCoordinator.swift; sourceTree = "<group>"; };
+		E0228A2B28119B8400DAC84D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		E0228A2D28119BD100DAC84D /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		E0228A2F28119C4300DAC84D /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		E0228A312811A30600DAC84D /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
+		E0228A332811A38F00DAC84D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		E0228A352811A3B300DAC84D /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		E0228A372811A3EF00DAC84D /* UIController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIController+Additions.swift"; sourceTree = "<group>"; };
+		E0228A3B2811B29A00DAC84D /* MovieListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListRequest.swift; sourceTree = "<group>"; };
+		E0228A3D281441CB00DAC84D /* MovieDetailRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailRequest.swift; sourceTree = "<group>"; };
+		E0228A3F28144A6800DAC84D /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
+		E0228A422814538D00DAC84D /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		E0228A44281453A600DAC84D /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +196,7 @@
 		E0228A1528103F1100DAC84D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E0228A412814537200DAC84D /* MovieDetail */,
 				E0228A282810496500DAC84D /* Flow */,
 				E0228A1428103EFF00DAC84D /* List */,
 			);
@@ -182,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				E0228A23281041D700DAC84D /* Movie.swift */,
+				E0228A3F28144A6800DAC84D /* MovieDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -189,6 +215,9 @@
 		E0228A1728103F3600DAC84D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				E0228A332811A38F00DAC84D /* LoadingView.swift */,
+				E0228A352811A3B300DAC84D /* UIColor+Additions.swift */,
+				E0228A372811A3EF00DAC84D /* UIController+Additions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -198,6 +227,8 @@
 			children = (
 				E0228A1A28103F6400DAC84D /* Request */,
 				E0228A1928103F5A00DAC84D /* Helper */,
+				E0228A2D28119BD100DAC84D /* Common.swift */,
+				E0228A312811A30600DAC84D /* MoviesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -205,6 +236,8 @@
 		E0228A1928103F5A00DAC84D /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				E0228A2B28119B8400DAC84D /* NetworkService.swift */,
+				E0228A2F28119C4300DAC84D /* ImageService.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -212,6 +245,8 @@
 		E0228A1A28103F6400DAC84D /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				E0228A3B2811B29A00DAC84D /* MovieListRequest.swift */,
+				E0228A3D281441CB00DAC84D /* MovieDetailRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -247,6 +282,15 @@
 				E0228A292810497300DAC84D /* MoviesFlowCoordinator.swift */,
 			);
 			path = Flow;
+			sourceTree = "<group>";
+		};
+		E0228A412814537200DAC84D /* MovieDetail */ = {
+			isa = PBXGroup;
+			children = (
+				E0228A422814538D00DAC84D /* MovieDetailViewController.swift */,
+				E0228A44281453A600DAC84D /* MovieDetailViewModel.swift */,
+			);
+			path = MovieDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,12 +423,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0228A382811A3EF00DAC84D /* UIController+Additions.swift in Sources */,
+				E0228A2C28119B8400DAC84D /* NetworkService.swift in Sources */,
 				E02289E5280F18A800DAC84D /* ListViewController.swift in Sources */,
 				E02289E1280F18A800DAC84D /* AppDelegate.swift in Sources */,
 				E0228A1F28103FCB00DAC84D /* AppDIContainer.swift in Sources */,
+				E0228A322811A30600DAC84D /* MoviesService.swift in Sources */,
+				E0228A45281453A600DAC84D /* MovieDetailViewModel.swift in Sources */,
+				E0228A432814538D00DAC84D /* MovieDetailViewController.swift in Sources */,
+				E0228A3C2811B29A00DAC84D /* MovieListRequest.swift in Sources */,
+				E0228A4028144A6800DAC84D /* MovieDetail.swift in Sources */,
+				E0228A2E28119BD100DAC84D /* Common.swift in Sources */,
 				E0228A2128103FE100DAC84D /* MoviesDIContainer.swift in Sources */,
 				E0228A1D28103F9F00DAC84D /* AppFlowCoordinator.swift in Sources */,
+				E0228A342811A38F00DAC84D /* LoadingView.swift in Sources */,
+				E0228A3E281441CB00DAC84D /* MovieDetailRequest.swift in Sources */,
+				E0228A362811A3B300DAC84D /* UIColor+Additions.swift in Sources */,
 				E0228A272810462C00DAC84D /* ListTableViewCell.swift in Sources */,
+				E0228A3028119C4300DAC84D /* ImageService.swift in Sources */,
 				E0228A1328103EEB00DAC84D /* ListViewModel.swift in Sources */,
 				E0228A2A2810497300DAC84D /* MoviesFlowCoordinator.swift in Sources */,
 				E0228A24281041D700DAC84D /* Movie.swift in Sources */,
