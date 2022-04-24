@@ -1,6 +1,6 @@
 # TheMovies
 
-* The app lists Trending movies from given api. 
+* The app lists Trending movies from The Movie DB api
 * User can view movie name, release year, rating and poster of movie in the list
 * User can scroll till the bottom of the list and load more data if available
 * User can view Movie detail on click of list item
