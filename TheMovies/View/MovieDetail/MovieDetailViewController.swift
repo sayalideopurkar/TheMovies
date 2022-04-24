@@ -198,9 +198,8 @@ extension MovieDetailViewController {
         ratingLabel.text = viewModel.rating
         runtimeLabel.text = viewModel.runTime
         let placeholderImage = "placeholderIcon"
-        if let urlPath = viewModel.posterPath {
-            Task {
-                let imageData = try await viewModel.imageService.load(urlPath: urlPath)
+        Task {
+            if let imageData = await viewModel.getImageData() {
                 DispatchQueue.main.async {
                     if let image = UIImage(data: imageData) {
                         self.itemImageView.image = image
@@ -208,10 +207,10 @@ extension MovieDetailViewController {
                         self.itemImageView.image = UIImage(named: placeholderImage)
                     }
                 }
+            } else {
+                //show placeholder image
+                itemImageView.image = UIImage(named: placeholderImage)
             }
-        } else {
-            //show placeholder image
-            itemImageView.image = UIImage(named: placeholderImage)
         }
         
     }

@@ -41,7 +41,6 @@ extension NetworkRequest {
                 let queryString = dictionary.compactMap({ (key, value) -> String in
                     return "\(key)=\(value)"
                 }).joined(separator: "&")
-                print(queryString)
                 return queryString
             }
         }

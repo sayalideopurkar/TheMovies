@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         ///Set up rootViewController
         let window = UIWindow(windowScene: windowScene)
         let navigationController = UINavigationController()
+        navigationController.setupNavigationBar()
         window.rootViewController = navigationController
         appFlowCoordinator = AppFlowCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
         appFlowCoordinator?.start()

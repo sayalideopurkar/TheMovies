@@ -10,17 +10,15 @@ import Foundation
 protocol MovieDetailViewModel : MovieDetailViewModelOutput {}
 
 protocol MovieDetailViewModelOutput {
-    var didShowError: ((String, String) -> Void)? {get set}
-    var imageService: ImageService {get}
     
     var title: String {get}
     var description: String {get}
-    var posterPath: String? {get}
     var releaseYear: String {get}
     var rating: String {get}
     var runTime: String {get}
     func getGenreListCount() -> Int
     func getGenre(for index: Int) -> String
+    func getImageData() async -> Data?
 }
 
 final class MovieDetailViewModelImpl: MovieDetailViewModel {
@@ -31,9 +29,6 @@ final class MovieDetailViewModelImpl: MovieDetailViewModel {
     }
     var description: String {
         return movieDetail.overview ?? "No overview available"
-    }
-    var posterPath: String? {
-        return movieDetail.posterPath
     }
     var releaseYear: String {
         if let date = movieDetail.releaseDate.getDate() {
@@ -68,5 +63,16 @@ extension MovieDetailViewModelImpl {
     }
     func getGenre(for index: Int) -> String {
         return movieDetail.genres[index].name
+    }
+    
+    func getImageData() async -> Data? {
+        guard let urlPath = movieDetail.posterPath else {
+            return nil
+        }
+        do {
+            return try await imageService.load(urlPath: urlPath)
+        } catch {
+            return nil
+        }
     }
 }

@@ -16,7 +16,7 @@ class ListViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24.0, weight: .semibold)
         label.textAlignment = .left
-        label.textColor = .cGrayDark
+        label.textColor = .cTheme
         return label
     }()
    
@@ -36,18 +36,6 @@ class ListViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var headerStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 8
-        stackView.distribution = .fillProportionally
-        stackView.alignment = .leading
-        stackView.addArrangedSubview(self.titleLabel)
-        return stackView
-    }()
-    
-    
     init(viewModel: ListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -64,7 +52,19 @@ class ListViewController: UIViewController {
         bindViewModel()
         viewModel.loadData()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        /// Hide navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        /// Show navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     private func bindViewModel() {
         viewModel.didStartLoading = {
             LoadingView.show()
@@ -117,7 +117,7 @@ extension ListViewController : UITableViewDelegate, UITableViewDataSource {
 extension ListViewController {
     private func setupViews() {
         view.backgroundColor = .cBackground
-        view.addSubview(headerStackView)
+        view.addSubview(titleLabel)
         view.addSubview(tableView)
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.darkText]
         tableView.backgroundColor = .clear
@@ -126,12 +126,12 @@ extension ListViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            headerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8.0),
-            headerStackView.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -8.0),
-            headerStackView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20.0),
-            headerStackView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20.0),
-            tableView.leftAnchor.constraint(equalTo: headerStackView.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: headerStackView.rightAnchor),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8.0),
+            titleLabel.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -20.0),
+            titleLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20.0),
+            titleLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20.0),
+            tableView.leftAnchor.constraint(equalTo: titleLabel.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: titleLabel.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8.0)
         ])
     }

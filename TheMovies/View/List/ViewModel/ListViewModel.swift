@@ -60,9 +60,9 @@ final class ListViewModelImpl: ListViewModel {
             async let movieData: MovieData = try await service.getMovieList(for: page)
             let fetchedData = try await movieData
             self.data = fetchedData
+            self.didStopLoading?()
             self.list.append(contentsOf: fetchedData.results)
             self.state = .loaded
-            self.didStopLoading?()
         } catch let error as HTTPError {
             //Handle error here
             self.state = .error
