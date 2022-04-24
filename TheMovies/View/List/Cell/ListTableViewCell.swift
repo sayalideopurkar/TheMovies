@@ -93,9 +93,24 @@ class ListTableViewCell: UITableViewCell {
      Setup cell using model
      */
     func configure(with model: Result, imageService: ImageService) {
-        let placeholderImage = "placeholderIcon"
-        itemImageView.image = UIImage(named: placeholderImage)
-        //TODO: - Load Image from path
+        let placeholderImage = "placeholderIcon"        
+        if let imagePath = model.posterPath {
+            do {
+                Task {
+                    let imageData = try await imageService.load(urlPath: imagePath)
+                    DispatchQueue.main.async {
+                        if let image = UIImage(data: imageData) {
+                            self.itemImageView.image = image
+                        } else {
+                            self.itemImageView.image = UIImage(named: placeholderImage)
+                        }
+                    }
+                }
+            }
+        } else {
+            //add placeholder
+            itemImageView.image = UIImage(named: placeholderImage)
+        }
         titleLabel.text = model.title
         yearLabel.text = model.releaseDate
     }

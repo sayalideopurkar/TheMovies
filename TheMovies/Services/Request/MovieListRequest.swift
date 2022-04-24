@@ -10,7 +10,7 @@ import Foundation
 Movies list fetch request
  */
 struct MovieListRequest : NetworkRequest {
-    //let pageNumber: Int = 1
+    let pageNumber: Int
     let apiKey: String = Common.apiKey
     
     var method: HTTPMethod {
@@ -22,12 +22,12 @@ struct MovieListRequest : NetworkRequest {
 }
 extension MovieListRequest: Encodable {
     enum CodingKeys: String, CodingKey {
-        //case pageNumber = "page"
+        case pageNumber = "page"
         case apiKey = "api_key"
     }
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(apiKey, forKey: .apiKey)
-        //try container.encode(pageNumber, forKey: .pageNumber)
+        try container.encode(pageNumber, forKey: .pageNumber)
     }
 }

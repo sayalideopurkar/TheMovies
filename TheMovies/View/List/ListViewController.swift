@@ -108,6 +108,10 @@ extension ListViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectItem(at: indexPath.row)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        viewModel.handlePagination(at: indexPath.row)
+    }
 }
 //MARK: - Setup
 extension ListViewController {

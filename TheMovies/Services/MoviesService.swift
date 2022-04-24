@@ -25,7 +25,7 @@ final class MoviesServiceImpl : MoviesService {
     // MARK: Network methods
     func getMovieList(for page:Int) async throws -> MovieData {
         do {
-            let movieRequest = MovieListRequest()
+            let movieRequest = MovieListRequest(pageNumber: page)
             return try await networkService.http(request: movieRequest)
         } catch {
             throw error

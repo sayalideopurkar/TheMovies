@@ -121,8 +121,22 @@ extension MovieDetailViewController {
         
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.description
-        //TODO: load image in imageview
-        itemImageView.image = UIImage(named: "placeholderIcon")
+        let placeholderImage = "placeholderIcon"
+        if let urlPath = viewModel.posterPath {
+            Task {
+                let imageData = try await viewModel.imageService.load(urlPath: urlPath)
+                DispatchQueue.main.async {
+                    if let image = UIImage(data: imageData) {
+                        self.itemImageView.image = image
+                    } else {
+                        self.itemImageView.image = UIImage(named: placeholderImage)
+                    }
+                }
+            }
+        } else {
+            //show placeholder image
+            itemImageView.image = UIImage(named: placeholderImage)
+        }
         
     }
     private func setupConstraints() {

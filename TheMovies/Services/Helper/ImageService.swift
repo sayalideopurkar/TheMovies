@@ -10,14 +10,17 @@ import Foundation
  ImageService with caching using NSCache
  */
 protocol ImageService {
-    func load(url: URL) async throws -> Data
+    func load(urlPath: String) async throws -> Data
 }
 
 final class ImageServiceImpl: ImageService {
 
     private let cachedImages = NSCache<NSURL, NSData>()
     /// Returns the cached image if available, otherwise asynchronously loads and caches it.
-    func load(url: URL) async throws -> Data {
+    func load(urlPath: String) async throws -> Data {
+        guard let url = URL(string: Common.imageBaseURL + "/" + urlPath) else {
+            throw HTTPError.invalidRequest
+        }
         if let cachedImageData = cachedImages.object(forKey: url as NSURL) {
             return cachedImageData as Data
         }

@@ -15,6 +15,7 @@ protocol MovieDetailViewModelOutput {
     
     var title: String {get}
     var description: String {get}
+    var posterPath: String? {get}
 }
 
 final class MovieDetailViewModelImpl: MovieDetailViewModel {
@@ -24,6 +25,9 @@ final class MovieDetailViewModelImpl: MovieDetailViewModel {
     }
     var description: String {
         return movieDetail.overview ?? "No overview available"
+    }
+    var posterPath: String? {
+        return movieDetail.posterPath
     }
     private let movieDetail: MovieDetail
     internal let imageService: ImageService

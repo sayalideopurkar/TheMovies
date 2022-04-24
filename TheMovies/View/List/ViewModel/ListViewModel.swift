@@ -11,8 +11,9 @@ struct MoviesViewModelActions {
     let showMovieDetail: (MovieDetail) -> Void
 }
 protocol ListViewModelInput {
-    func loadData()
+    func loadData(_ page: Int)
     func didSelectItem(at index: Int)
+    func handlePagination(at index: Int)
 }
 protocol ListViewModelOutput {
     var didShowError: ((String, String) -> Void)? {get set}
@@ -36,31 +37,39 @@ final class ListViewModelImpl: ListViewModel {
     private let actions: MoviesViewModelActions?
     private var service: MoviesService
     var imageService: ImageService
-
+    private enum State {
+        case loading, loaded, paginating, error
+    }
+    private var state = State.loading
+    
     init(service: MoviesService, actions: MoviesViewModelActions? = nil, imageService: ImageService) {
         self.service = service
         self.actions = actions
         self.imageService = imageService
     }
     
-    //private var data: MovieData?
+    private var data: MovieData?
     private var list: [Result] = [] {
         didSet {
             didReload?()
         }
     }
     
-    private func fetchData() async {
+    private func fetchData(_ page: Int) async {
         do {
-            async let movieData: MovieData = try await service.getMovieList(for: 0)
-            let movieList = try await movieData.results
-            self.list = movieList
+            async let movieData: MovieData = try await service.getMovieList(for: page)
+            let fetchedData = try await movieData
+            self.data = fetchedData
+            self.list.append(contentsOf: fetchedData.results)
+            self.state = .loaded
             self.didStopLoading?()
         } catch let error as HTTPError {
             //Handle error here
+            self.state = .error
             self.didStopLoading?()
             self.didShowError?(error.errorTitle, error.errorDescription)
         } catch {
+            self.state = .error
             self.didStopLoading?()
             self.didShowError?("Error", error.localizedDescription)
         }
@@ -85,11 +94,16 @@ final class ListViewModelImpl: ListViewModel {
     }
 }
 ///ListViewModelInput methods
+extension ListViewModelInput {
+    func loadData(_ page: Int = 1) {
+        return loadData(page)
+    }
+}
 extension ListViewModelImpl {
-    func loadData() {
+    func loadData(_ page: Int) {
         self.didStartLoading?()
         Task {
-            await self.fetchData()
+            await self.fetchData(page)
         }
     }
     
@@ -97,6 +111,12 @@ extension ListViewModelImpl {
         self.didStartLoading?()
         Task {
             await self.fetchDetailData(movieId: list[index].id)
+        }
+    }
+    
+    func handlePagination(at index: Int) {
+        if let movieData = self.data, state != .paginating, index == list.count - 1, movieData.totalPages > list.count {
+            loadData(movieData.page+1)
         }
     }
 }
